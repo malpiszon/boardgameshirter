@@ -1,5 +1,6 @@
 package net.malpiszon.boardgameshirter.models;
 
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,6 +20,9 @@ public class Card {
     @Column(name = "width", nullable = false)
     @NotNull
     private Integer width;
+
+    @OneToMany(mappedBy = "card")
+    private Set<GameCard> gameCards;
 
     public Card(Integer height, Integer width) {
         this.height = height;

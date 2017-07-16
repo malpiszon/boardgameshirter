@@ -17,7 +17,7 @@ public class GameService {
     @Autowired
     private GameRepository repository;
 
-    private static final Predicate<Game> gameExists(String name) {
+    private static Predicate<Game> gameExists(String name) {
         return g -> g.getName().equals(name);
     }
 
@@ -29,12 +29,12 @@ public class GameService {
             throw new EntityAlreadyExistsException(String.format("There already exists a game with name '%s'", game.getName()));
         }
 
-        repository.save(new Game(game.getName()));
+        repository.save(game);
     }
 
     public List<Game> findAll() {
         List<Game> games = Lists.newArrayList();
-        repository.findAll().forEach(game -> games.add(new Game(game.getName())));
+        games.addAll(repository.findAll());
 
         return games;
     }
