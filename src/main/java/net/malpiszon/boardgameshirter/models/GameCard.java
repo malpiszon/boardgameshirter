@@ -6,17 +6,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "gamecards")
+@Table(name = "games_cards")
 public class GameCard implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "gameid")
+    @JoinColumn(name = "game_id")
     private Game game;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "cardid")
+    @JoinColumn(name = "card_id")
     private Card card;
 
     @Column(name = "quantity", nullable = false)

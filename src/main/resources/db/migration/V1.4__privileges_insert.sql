@@ -1,0 +1,1 @@
+INSERT INTO privileges(name) VALUES ('MODIFY_PRIVILEGE');
