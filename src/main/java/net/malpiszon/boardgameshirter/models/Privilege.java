@@ -4,7 +4,7 @@ import java.util.Collection;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "priviledges")
+@Table(name = "privileges")
 public class Privilege {
 
     @Id
