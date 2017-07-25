@@ -12,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/game")
+@RequestMapping("api/${api.version}/game")
 public class GameController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class GameController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('MODIFY_PRIVILEGE')")
-    public void createUser(@RequestBody @Valid final Game game) throws EntityAlreadyExistsException {
+    public void createGame(@RequestBody @Valid final Game game) throws EntityAlreadyExistsException {
         service.save(game);
     }
 }

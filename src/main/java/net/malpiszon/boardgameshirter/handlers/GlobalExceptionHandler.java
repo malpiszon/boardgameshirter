@@ -3,6 +3,7 @@ package net.malpiszon.boardgameshirter.handlers;
 import net.malpiszon.boardgameshirter.exceptions.EntityAlreadyExistsException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,10 +28,17 @@ public class GlobalExceptionHandler {
         return "";
     }
 
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(value = AccessDeniedException.class)
+    public String handleAccessDeniedException(Exception e) {
+        LOG.info(e.getMessage());
+        return "";
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = Exception.class)
     public String handleException(Exception e) {
-        LOG.info("Bad request; " + e.getMessage());
+        LOG.info("Bad request: " + e.getMessage());
         return "";
     }
 }
