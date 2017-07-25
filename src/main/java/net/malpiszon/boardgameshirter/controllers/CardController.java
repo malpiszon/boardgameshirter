@@ -8,6 +8,7 @@ import net.malpiszon.boardgameshirter.models.Card;
 import net.malpiszon.boardgameshirter.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,6 +25,7 @@ public class CardController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('MODIFY_PRIVILEGE')")
     public void createCardType(@RequestBody @Valid final Card card) throws EntityAlreadyExistsException {
         service.save(card);
     }
