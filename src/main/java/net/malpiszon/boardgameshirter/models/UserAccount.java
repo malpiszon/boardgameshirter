@@ -25,6 +25,12 @@ public class UserAccount {
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
+    @OneToMany(mappedBy = "shirt")
+    private Set<UserShirt> userShirts;
+
+    @OneToMany(mappedBy = "game")
+    private Set<UserGame> userGames;
+
     public UserAccount(String name, String password) {
         this.name = name;
         this.password = password;

@@ -6,8 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "users_games")
-public class UserGame implements Serializable {
+@Table(name = "users_shirts")
+public class UserShirt implements Serializable {
 
     @Id
     private Long id;
@@ -17,31 +17,23 @@ public class UserGame implements Serializable {
     private UserAccount userAccount;
 
     @ManyToOne
-    @JoinColumn(name = "game_id")
-    private Game game;
+    @JoinColumn(name = "shirt_id")
+    private Shirt shirt;
 
-    @OneToMany(mappedBy = "userGame")
+    @OneToMany(mappedBy = "userShirt")
     private Set<UserShirtUserGame> userShirtUserGames;
 
     @Column(name = "quantity", nullable = false)
     @NotNull
     private Integer quantity;
 
-    public UserGame() {}
-
-    public String getUserName() {
-        return userAccount.getName();
-    }
+    public UserShirt() {}
 
     public Integer getQuantity() {
         return quantity;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public Set<UserShirtUserGame> getShirtedWith() {
-        return userShirtUserGames;
+    public Shirt getShirt() {
+        return shirt;
     }
 }

@@ -3,15 +3,18 @@ package net.malpiszon.boardgameshirter.models;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "cards")
-public class Card {
+@Table(name = "shirts")
+public class Shirt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name", nullable = false)
+    @NotNull
+    private String name;
 
     @Column(name = "height", nullable = false)
     @NotNull
@@ -21,18 +24,19 @@ public class Card {
     @NotNull
     private Integer width;
 
-    @OneToMany(mappedBy = "card")
-    private Set<GameCard> gameCards;
+    @OneToMany(mappedBy = "shirt")
+    private Set<UserShirt> userShirts;
 
-    @OneToMany(mappedBy = "card")
-    private Set<UserShirtUserGame> userShirtUserGames;
-
-    public Card(Integer height, Integer width) {
+    public Shirt(Integer height, Integer width) {
         this.height = height;
         this.width = width;
     }
 
-    public Card() {}
+    public Shirt() {}
+
+    public String getName() {
+        return name;
+    }
 
     public Integer getHeight() {
         return height;
