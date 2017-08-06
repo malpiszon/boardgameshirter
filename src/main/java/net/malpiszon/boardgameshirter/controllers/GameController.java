@@ -25,7 +25,7 @@ public class GameController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAuthority('MODIFY_PRIVILEGE')")
+    @PreAuthorize("hasAuthority('T(net.malpiszon.boardgameshirter.models.Privilege).ADMIN')")
     public void createGame(@RequestBody @Valid final Game game) throws EntityAlreadyExistsException {
         service.save(game);
     }

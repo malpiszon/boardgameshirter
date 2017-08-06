@@ -25,7 +25,7 @@ public class CardController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAuthority('MODIFY_PRIVILEGE')")
+    @PreAuthorize("hasAuthority('T(net.malpiszon.boardgameshirter.models.Privilege).ADMIN')")
     public void createCardType(@RequestBody @Valid final Card card) throws EntityAlreadyExistsException {
         service.save(card);
     }

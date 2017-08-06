@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Table(name = "privileges")
 public class Privilege {
 
+    public static final String ADMIN = "ADMIN_PRIVILEGE";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
