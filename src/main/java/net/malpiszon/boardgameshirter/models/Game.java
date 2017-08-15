@@ -1,6 +1,5 @@
 package net.malpiszon.boardgameshirter.models;
 
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,9 +21,9 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<GameCard> gameCards;
 
-    public Game(String name) {
+    public Game(String name, Set<GameCard> gameCards) {
         this.name = name;
-        this.gameCards = new HashSet<>();
+        this.gameCards = gameCards;
     }
 
     public Game() {}
