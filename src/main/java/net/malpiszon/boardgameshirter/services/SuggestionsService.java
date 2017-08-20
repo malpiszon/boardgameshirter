@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import net.malpiszon.boardgameshirter.dtos.Suggestion;
+import net.malpiszon.boardgameshirter.dtos.SuggestionDto;
 import net.malpiszon.boardgameshirter.models.*;
 import net.malpiszon.boardgameshirter.repositories.UserGameRepository;
 import net.malpiszon.boardgameshirter.repositories.UserShirtRepository;
@@ -25,8 +25,8 @@ public class SuggestionsService {
     @Autowired
     private UserShirtRepository userShirtRepository;
 
-    public List<Suggestion> getSuggestions() {
-        List<Suggestion> suggestions = Lists.newArrayList();
+    public List<SuggestionDto> getSuggestions() {
+        List<SuggestionDto> suggestions = Lists.newArrayList();
         List<UserGame> userGames = userGameRepository.findByUserAccountName(loggedUserService.getLoggedUserName().orElseThrow(() -> new AccessDeniedException("Error during logged username retrieval")));
         List<UserShirt> userShirts = userShirtRepository.findByUserAccountName(loggedUserService.getLoggedUserName().orElseThrow(() -> new AccessDeniedException("Error during logged username retrieval")));
 
@@ -46,14 +46,14 @@ public class SuggestionsService {
                         if (shirt.getHeight() >= card.getHeight() && shirt.getHeight() <= (card.getHeight() + MAX_SIZE_DIFF)
                                 && shirt.getWidth() >= card.getWidth() && shirt.getWidth() <= (card.getWidth() + MAX_SIZE_DIFF)
                                 && gameCard.getQuantity() <= userShirt.getQuantity()) {
-                            suggestions.add(new Suggestion(userGame.getGame(), card, shirt, notShirtedQuantity));
+                            suggestions.add(new SuggestionDto(userGame.getGame(), card, shirt, notShirtedQuantity));
                         }
                     }
                 }
             }
         }
 
-        suggestions.sort(Comparator.comparingInt(Suggestion::getQuantity).reversed());
+        suggestions.sort(Comparator.comparingInt(SuggestionDto::getQuantity).reversed());
         return suggestions;
     }
 }

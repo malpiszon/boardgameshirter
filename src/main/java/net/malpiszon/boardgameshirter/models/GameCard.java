@@ -22,6 +22,11 @@ public class GameCard implements Serializable {
     @NotNull
     private Integer quantity;
 
+    public GameCard(Card card, Integer quantity) {
+        this.card = card;
+        this.quantity = quantity;
+    }
+
     public GameCard() {}
 
     public Integer getQuantity() {

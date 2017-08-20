@@ -4,14 +4,14 @@ import net.malpiszon.boardgameshirter.models.Card;
 import net.malpiszon.boardgameshirter.models.Game;
 import net.malpiszon.boardgameshirter.models.Shirt;
 
-public class Suggestion {
+public class SuggestionDto {
 
     private Game game;
     private Card card;
     private Shirt shirt;
     private int quantity;
 
-    public Suggestion(Game game, Card card, Shirt shirt, int quantity) {
+    public SuggestionDto(Game game, Card card, Shirt shirt, int quantity) {
         this.game = game;
         this.card = card;
         this.shirt = shirt;

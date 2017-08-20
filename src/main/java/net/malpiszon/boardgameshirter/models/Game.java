@@ -21,9 +21,23 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<GameCard> gameCards;
 
+    @OneToMany(mappedBy = "addonTo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Game> parentTo;
+
+    @ManyToOne
+    @JoinColumn(name = "addon_to", updatable = false)
+    private Game addonTo;
+
     public Game(String name, Set<GameCard> gameCards) {
         this.name = name;
         this.gameCards = gameCards;
+        this.addonTo = null;
+    }
+
+    public Game(String name, Set<GameCard> gameCards, Game addonTo) {
+        this.name = name;
+        this.gameCards = gameCards;
+        this.addonTo = addonTo;
     }
 
     public Game() {}
@@ -34,5 +48,9 @@ public class Game {
 
     public Set<GameCard> getGameCards() {
         return gameCards;
+    }
+
+    public Game getAddonTo() {
+        return addonTo;
     }
 }

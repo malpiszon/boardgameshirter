@@ -1,6 +1,7 @@
 package net.malpiszon.boardgameshirter.handlers;
 
 import net.malpiszon.boardgameshirter.exceptions.EntityAlreadyExistsException;
+import net.malpiszon.boardgameshirter.exceptions.NoSuchEntityException;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -24,6 +25,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(value = EntityAlreadyExistsException.class)
     public String handleEntityAlreadyExistsException(Exception e) {
+        LOG.info(e.getMessage());
+        return "";
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NoSuchEntityException.class)
+    public String handleNoSuchEntityException(Exception e) {
         LOG.info(e.getMessage());
         return "";
     }

@@ -27,7 +27,8 @@ public class Shirt {
     @OneToMany(mappedBy = "shirt")
     private Set<UserShirt> userShirts;
 
-    public Shirt(Integer height, Integer width) {
+    public Shirt(String name, Integer height, Integer width) {
+        this.name = name;
         this.height = height;
         this.width = width;
     }

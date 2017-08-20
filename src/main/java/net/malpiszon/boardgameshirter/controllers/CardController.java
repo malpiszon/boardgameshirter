@@ -2,7 +2,7 @@ package net.malpiszon.boardgameshirter.controllers;
 
 import java.util.List;
 
-import net.malpiszon.boardgameshirter.models.Card;
+import net.malpiszon.boardgameshirter.dtos.CardDto;
 import net.malpiszon.boardgameshirter.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public class CardController {
     private CardService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Card> findAll() {
+    public List<CardDto> findAll() {
         return service.findAll();
     }
 }

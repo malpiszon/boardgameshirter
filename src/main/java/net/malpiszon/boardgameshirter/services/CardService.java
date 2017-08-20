@@ -2,8 +2,10 @@ package net.malpiszon.boardgameshirter.services;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
+import net.malpiszon.boardgameshirter.dtos.CardDto;
 import net.malpiszon.boardgameshirter.exceptions.EntityAlreadyExistsException;
 import net.malpiszon.boardgameshirter.models.Card;
 import net.malpiszon.boardgameshirter.repositories.CardRepository;
@@ -32,10 +34,14 @@ public class CardService {
         repository.save(card);
     }
 
-    public List<Card> findAll() {
-        List<Card> cards = Lists.newArrayList();
-        cards.addAll(repository.findAll());
+    public List<CardDto> findAll() {
+        List<CardDto> cards = Lists.newArrayList();
+        cards.addAll(repository.findAll().stream().map(c -> createCardDto(c)).collect(Collectors.toList()));
 
         return cards;
+    }
+
+    public CardDto createCardDto(Card card) {
+        return new CardDto(card.getHeight(), card.getWidth());
     }
 }
