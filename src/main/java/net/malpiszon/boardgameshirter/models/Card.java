@@ -10,7 +10,8 @@ import javax.validation.constraints.Size;
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="cards1_id_seq")
+    @SequenceGenerator(name="cards1_id_seq", sequenceName="cards1_id_seq", allocationSize=1)
     private Long id;
 
     @Column(name = "height", nullable = false)
