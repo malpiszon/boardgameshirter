@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import net.malpiszon.boardgameshirter.dtos.CardDto;
@@ -37,7 +37,7 @@ public class CardControllerTest {
     public void givenCard_whenFindAll_thenReturnJsonArray() throws Exception {
         CardDto cardDto = new CardDto(20, 10);
 
-        List<CardDto> cards = Arrays.asList(cardDto);
+        List<CardDto> cards = Collections.singletonList(cardDto);
 
         given(service.findAll()).willReturn(cards);
 
