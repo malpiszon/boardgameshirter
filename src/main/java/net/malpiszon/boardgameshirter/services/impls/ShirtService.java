@@ -1,4 +1,4 @@
-package net.malpiszon.boardgameshirter.services;
+package net.malpiszon.boardgameshirter.services.impls;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -9,15 +9,20 @@ import net.malpiszon.boardgameshirter.dtos.ShirtDto;
 import net.malpiszon.boardgameshirter.exceptions.EntityAlreadyExistsException;
 import net.malpiszon.boardgameshirter.models.Shirt;
 import net.malpiszon.boardgameshirter.repositories.ShirtRepository;
+import net.malpiszon.boardgameshirter.services.IShirtService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ShirtService {
+public class ShirtService implements IShirtService {
 
     @Autowired
     private ShirtRepository shirtRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     private static Predicate<Shirt> shirtExists(String name) {
         return s -> s.getName().equals(name);
@@ -36,7 +41,7 @@ public class ShirtService {
 
     public List<ShirtDto> findAll() {
         List<ShirtDto> shirts = Lists.newArrayList();
-        shirts.addAll(shirtRepository.findAll().stream().map(s -> new ShirtDto(s.getName(), s.getHeight(), s.getWidth())).collect(Collectors.toList()));
+        shirts.addAll(shirtRepository.findAll().stream().map(s -> modelMapper.map(s, ShirtDto.class)).collect(Collectors.toList()));
 
         return shirts;
     }

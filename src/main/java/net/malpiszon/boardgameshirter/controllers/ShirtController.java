@@ -5,7 +5,7 @@ import javax.validation.Valid;
 
 import net.malpiszon.boardgameshirter.dtos.ShirtDto;
 import net.malpiszon.boardgameshirter.exceptions.EntityAlreadyExistsException;
-import net.malpiszon.boardgameshirter.services.ShirtService;
+import net.malpiszon.boardgameshirter.services.IShirtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class ShirtController {
 
     @Autowired
-    private ShirtService service;
+    private IShirtService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<ShirtDto> findAll() {

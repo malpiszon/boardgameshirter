@@ -1,26 +1,26 @@
-package net.malpiszon.boardgameshirter.services;
+package net.malpiszon.boardgameshirter.services.impls;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
-import net.malpiszon.boardgameshirter.dtos.CardDto;
-import net.malpiszon.boardgameshirter.dtos.GameDto;
 import net.malpiszon.boardgameshirter.dtos.UserGameDto;
 import net.malpiszon.boardgameshirter.dtos.UserShirtUserGameDto;
-import net.malpiszon.boardgameshirter.models.Game;
 import net.malpiszon.boardgameshirter.repositories.UserGameRepository;
+import net.malpiszon.boardgameshirter.services.IGameService;
+import net.malpiszon.boardgameshirter.services.IUserGameService;
+import net.malpiszon.boardgameshirter.services.impls.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserGameService {
+public class UserGameService implements IUserGameService {
 
     @Autowired
     private UserGameRepository repository;
 
     @Autowired
-    private GameService gameService;
+    private IGameService gameService;
     @Autowired
     private CardService cardService;
 

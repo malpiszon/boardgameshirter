@@ -10,12 +10,14 @@ import net.malpiszon.boardgameshirter.dtos.CardDto;
 import net.malpiszon.boardgameshirter.exceptions.EntityAlreadyExistsException;
 import net.malpiszon.boardgameshirter.models.Card;
 import net.malpiszon.boardgameshirter.repositories.CardRepository;
+import net.malpiszon.boardgameshirter.services.impls.CardService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -29,8 +31,13 @@ public class CardServiceTest {
     static class CardServiceTestContextConfiguration {
 
         @Bean
-        public CardService cardService() {
+        public ICardService cardService() {
             return new CardService();
+        }
+
+        @Bean
+        public ModelMapper modelMapper() {
+            return new ModelMapper();
         }
     }
 
@@ -38,7 +45,7 @@ public class CardServiceTest {
     public final ExpectedException exception = ExpectedException.none();
 
     @Autowired
-    private CardService cardService;
+    private ICardService cardService;
 
     @MockBean
     private CardRepository cardRepository;

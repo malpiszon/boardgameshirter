@@ -42,4 +42,12 @@ public class Card {
     public Integer getWidth() {
         return width;
     }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
 }

@@ -1,4 +1,4 @@
-package net.malpiszon.boardgameshirter.services;
+package net.malpiszon.boardgameshirter.services.impls;
 
 import java.util.ArrayList;
 import java.util.Collection;

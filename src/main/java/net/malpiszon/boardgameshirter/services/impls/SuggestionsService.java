@@ -1,4 +1,4 @@
-package net.malpiszon.boardgameshirter.services;
+package net.malpiszon.boardgameshirter.services.impls;
 
 import java.util.*;
 
@@ -8,17 +8,19 @@ import net.malpiszon.boardgameshirter.dtos.SuggestionDto;
 import net.malpiszon.boardgameshirter.models.*;
 import net.malpiszon.boardgameshirter.repositories.UserGameRepository;
 import net.malpiszon.boardgameshirter.repositories.UserShirtRepository;
+import net.malpiszon.boardgameshirter.services.ILoggedUserService;
+import net.malpiszon.boardgameshirter.services.ISuggestionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SuggestionsService {
+public class SuggestionsService implements ISuggestionsService {
 
     private final static int MAX_SIZE_DIFF = 3;
 
     @Autowired
-    private LoggedUserService loggedUserService;
+    private ILoggedUserService loggedUserService;
 
     @Autowired
     private UserGameRepository userGameRepository;

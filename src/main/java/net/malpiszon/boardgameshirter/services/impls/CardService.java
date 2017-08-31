@@ -1,4 +1,4 @@
-package net.malpiszon.boardgameshirter.services;
+package net.malpiszon.boardgameshirter.services.impls;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -9,15 +9,20 @@ import net.malpiszon.boardgameshirter.dtos.CardDto;
 import net.malpiszon.boardgameshirter.exceptions.EntityAlreadyExistsException;
 import net.malpiszon.boardgameshirter.models.Card;
 import net.malpiszon.boardgameshirter.repositories.CardRepository;
+import net.malpiszon.boardgameshirter.services.ICardService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CardService {
+public class CardService implements ICardService {
 
     @Autowired
     private CardRepository repository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     private static Predicate<Card> cardExists(Integer height, Integer width) {
         return g -> g.getHeight().equals(height) && g.getWidth().equals(width);
@@ -42,6 +47,6 @@ public class CardService {
     }
 
     public CardDto createCardDto(Card card) {
-        return new CardDto(card.getHeight(), card.getWidth());
+        return modelMapper.map(card, CardDto.class);
     }
 }

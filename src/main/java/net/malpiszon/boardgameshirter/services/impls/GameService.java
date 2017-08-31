@@ -1,4 +1,4 @@
-package net.malpiszon.boardgameshirter.services;
+package net.malpiszon.boardgameshirter.services.impls;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,17 +18,22 @@ import net.malpiszon.boardgameshirter.models.Game;
 import net.malpiszon.boardgameshirter.models.GameCard;
 import net.malpiszon.boardgameshirter.repositories.CardRepository;
 import net.malpiszon.boardgameshirter.repositories.GameRepository;
+import net.malpiszon.boardgameshirter.services.IGameService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class GameService {
+public class GameService implements IGameService {
 
     @Autowired
     private GameRepository gameRepository;
     @Autowired
     private CardRepository cardRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     private static Predicate<Game> gameExists(String name) {
         return g -> g.getName().equals(name);
@@ -74,7 +79,7 @@ public class GameService {
 
     public GameDto createGameDto(Game game) {
         return new GameDto(game.getName(), Optional.ofNullable(game.getGameCards()).orElse(Collections.emptySet()).stream().map(
-                c -> new GameCardDto(new CardDto(c.getCard().getHeight(), c.getCard().getWidth()), c.getQuantity())
+                c -> new GameCardDto(modelMapper.map(c.getCard(), CardDto.class), c.getQuantity())
         ).collect(Collectors.toSet()), game.getAddonTo() != null ? game.getAddonTo().getName() : "");
     }
 }

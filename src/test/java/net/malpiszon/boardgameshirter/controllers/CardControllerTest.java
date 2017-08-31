@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.malpiszon.boardgameshirter.dtos.CardDto;
-import net.malpiszon.boardgameshirter.services.CardService;
+import net.malpiszon.boardgameshirter.services.impls.CardService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

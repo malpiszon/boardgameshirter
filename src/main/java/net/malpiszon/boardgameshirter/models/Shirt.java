@@ -46,4 +46,16 @@ public class Shirt {
     public Integer getWidth() {
         return width;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
 }
