@@ -33,7 +33,7 @@ public class CardService implements ICardService {
         List<Card> existing = repository.findAll();
 
         if (existing.stream().filter(cardExists(card.getHeight(), card.getWidth())).count() > 0) {
-            throw new EntityAlreadyExistsException(String.format("There already exists a game with dimensions '%d x %d'", card.getHeight(), card.getWidth()));
+            throw new EntityAlreadyExistsException(String.format("There already exists a game card with dimensions '%d x %d'", card.getHeight(), card.getWidth()));
         }
 
         repository.save(card);
